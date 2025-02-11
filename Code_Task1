@@ -1,0 +1,52 @@
+// C++ code
+//Part 1: Basic Traffic Light System
+
+const int redLed = 9;
+const int yellowLed = 10;
+const int greenLed = 11;
+const int pushButton = 13;
+int buttonState = 0;//INITIALLY LOWN IS TAKEN
+
+void setup() {
+  pinMode(redLed, OUTPUT);
+  pinMode(yellowLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+  pinMode(pushButton, INPUT); 
+}
+
+void loop() {
+  
+  buttonState = digitalRead(pushButton);//READS STATE OF THE PUSH_BUTTON
+  if (buttonState == HIGH)
+  {
+    pedestrian_Crossing();
+  }else
+  {
+    normal_Cycle();
+  }
+}
+  
+
+void normal_Cycle() //NORMAL TRAFFIC LIGHT BEHAVIOUR 
+{
+    digitalWrite(greenLed, HIGH);
+    delay(2000); 
+    digitalWrite(greenLed, LOW);
+  
+    digitalWrite(yellowLed, HIGH);
+    delay(2000); 
+    digitalWrite(yellowLed, LOW);
+  
+    digitalWrite(redLed, HIGH);
+    delay(2000); 
+    digitalWrite(redLed, LOW);
+}
+
+void pedestrian_Crossing() 
+{
+    digitalWrite(greenLed, LOW);
+    digitalWrite(yellowLed, LOW);
+    digitalWrite(redLed, HIGH);
+    delay(5000); //WAIT FOR PEDESTRIAN TO CROSS
+    digitalWrite(redLed, LOW);
+}
